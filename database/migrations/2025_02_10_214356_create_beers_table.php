@@ -17,8 +17,19 @@ return new class extends Migration
 
         try {
 
-            Schema::table('users', function (Blueprint $table) {
-                $table->string('social_id')->nullable();
+            Schema::create('beers', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->string('type');
+                $table->float('abv');
+                $table->integer('ibu');
+                $table->integer('bitterness')->nullable();
+                $table->integer('malt')->nullable();
+                $table->integer('body')->nullable();
+                $table->string('temps')->nullable();
+                $table->text('food_pairing')->nullable();
+                $table->text('description')->nullable();
+                $table->timestamps();
                 $table->softDeletes();
             });
 
@@ -34,8 +45,6 @@ return new class extends Migration
                 ]);
             throw $e;
         }
-
-
     }
 
     /**
@@ -46,11 +55,7 @@ return new class extends Migration
         DB::beginTransaction();
 
         try {
-
-            Schema::table('users', function (Blueprint $table) {
-                $table->dropColumn('social_id');
-                $table->dropSoftDeletes();
-            });
+            Schema::dropIfExists('beers');
 
             DB::commit();
         } catch (\Exception $e) {
