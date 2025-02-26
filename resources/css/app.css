@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind colors;
+
+@font-face {
+    font-family: Diogenes;
+    src: url('../../public/fonts/DIOGENES.ttf');
+}
+
+@theme {
+    --font-diogenes: 'Diogenes', sans-serif;
+    --color-greek-blue: #234876;
+    --color-greek-gold: #D4AF37;
+    --color-greek-cream: #F5F1E6;
+}
