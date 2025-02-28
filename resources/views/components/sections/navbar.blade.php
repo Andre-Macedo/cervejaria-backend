@@ -8,10 +8,10 @@
 
             <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-8">
-                    <a href="#home" class="text-greek-gold hover:text-white px-3 py-2">Início</a>
-                    <a href="#beers" class="text-greek-gold hover:text-white px-3 py-2">Cervejas</a>
-                    <a href="#about" class="text-greek-gold hover:text-white px-3 py-2">História</a>
-                    <a href="#contact" class="text-greek-gold hover:text-white px-3 py-2">Contato</a>
+                    <a href="#home" class="text-greek-gold font-trajan hover:text-white px-3 py-2">Início</a>
+                    <a href="#beers" class="text-greek-gold font-trajan hover:text-white px-3 py-2">Cervejas</a>
+                    <a href="#about" class="text-greek-gold font-trajan hover:text-white px-3 py-2">História</a>
+                    <a href="#contact" class="text-greek-gold font-trajan hover:text-white px-3 py-2">Contato</a>
                 </div>
             </div>
 

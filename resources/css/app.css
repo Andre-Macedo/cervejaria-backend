@@ -8,8 +8,14 @@
     src: url('../../public/fonts/DIOGENES.ttf');
 }
 
+@font-face {
+    font-family: Trajan;
+    src: url('../../public/fonts/TrajanPro-Regular.ttf');
+}
+
 @theme {
     --font-diogenes: 'Diogenes', sans-serif;
+    --font-trajan: 'Trajan', serif;
     --color-greek-blue: #234876;
     --color-greek-gold: #D4AF37;
     --color-greek-cream: #F5F1E6;

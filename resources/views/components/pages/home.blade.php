@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
-<div>
-    <!-- People find pleasure in different ways. I find it in keeping my mind clear. - Marcus Aurelius -->
-</div>
+@section('content')
+    <x-sections.hero/>
+    <x-sections.beer-swiper/>
+    <x-sections.about-us/>
+    <x-sections.contact/>
+@endsection
