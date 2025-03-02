@@ -5,7 +5,7 @@
                 <h2 class="text-4xl font-trajan text-greek-blue mb-6">Nossa História</h2>
                 <div class="w-24 h-1 bg-greek-gold mb-8"></div>
                 <p class="text-gray-700 mb-6 font-serif">
-                    Fundada em 2020, a Cervejaria Dionísio nasceu da paixão pela arte cervejeira e pela cultura helénica.
+                    Fundada em 2021, a Cervejaria Dionísio nasceu da paixão pela arte cervejeira e pela cultura helénica.
                     Nossos mestres cervejeiros estudaram antigas técnicas gregas, combinando-as com métodos modernos
                     para criar cervejas únicas e memoráveis.
                 </p>
