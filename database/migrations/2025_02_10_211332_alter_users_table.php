@@ -13,18 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::beginTransaction();
-
         try {
-
             Schema::table('users', function (Blueprint $table) {
                 $table->string('social_id')->nullable();
                 $table->softDeletes();
             });
 
-            DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();
 
             Log::error('Migration error: ' . $e->getMessage(),
             [
@@ -34,7 +29,6 @@ return new class extends Migration
                 ]);
             throw $e;
         }
-
 
     }
 
@@ -43,9 +37,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::beginTransaction();
 
         try {
+            DB::beginTransaction();
 
             Schema::table('users', function (Blueprint $table) {
                 $table->dropColumn('social_id');
@@ -53,6 +47,7 @@ return new class extends Migration
             });
 
             DB::commit();
+
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -64,5 +59,6 @@ return new class extends Migration
                 ]);
             throw $e;
         }
+
     }
 };

@@ -13,8 +13,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::beginTransaction();
-
         try {
 
             Schema::create('beers', function (Blueprint $table) {
@@ -33,9 +31,7 @@ return new class extends Migration
                 $table->softDeletes();
             });
 
-            DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();
 
             Log::error('Migration error: ' . $e->getMessage(),
             [
@@ -45,6 +41,7 @@ return new class extends Migration
                 ]);
             throw $e;
         }
+
     }
 
     /**
@@ -52,14 +49,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::beginTransaction();
 
         try {
             Schema::dropIfExists('beers');
 
-            DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();
 
             Log::error('Migration error: ' . $e->getMessage(),
             [
@@ -69,5 +63,6 @@ return new class extends Migration
                 ]);
             throw $e;
         }
+
     }
 };
