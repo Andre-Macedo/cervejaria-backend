@@ -1,4 +1,4 @@
-FROM php:8.3.11-fpm
+FROM php:8.2-fpm
 
 # Diretório de trabalho
 WORKDIR /var/www/html
@@ -21,6 +21,9 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libicu-dev \
     libpq-dev \
+    net-tools \
+    nano \
+    procps \
     && rm -rf /var/lib/apt/lists/*
 
 # Configurar extensões PHP
@@ -38,21 +41,29 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g npm
 
-COPY composer.json composer.lock* ./
-
-RUN composer install --prefer-dist --no-autoloader
-
 # Copiar arquivos de dependências primeiro para cache
 COPY package.json package-lock.json* ./
 
 # Instalar dependências do npm
-RUN npm install --force
+RUN npm install
 
 # Copiar o restante da aplicação
 COPY . /var/www/html
 
+RUN composer install
+
 # Build dos assets
 RUN npm run build
+
+# Update PHP-FPM listen address to listen on all interfaces
+RUN sed -i 's/^listen = 127.0.0.1:9000/listen = 0.0.0.0:9000/' /usr/local/etc/php-fpm.d/www.conf
+RUN sed -i 's/^listen = 9000/listen = 0.0.0.0:9000/' /usr/local/etc/php-fpm.d/zz-docker.conf
+
+# Mudar proprietário do diretorio
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 775 /var/www
+
+USER www-data
 
 # Porta e comando de inicialização
 EXPOSE 9000

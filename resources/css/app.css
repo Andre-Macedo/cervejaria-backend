@@ -5,12 +5,12 @@
 
 @font-face {
     font-family: Diogenes;
-    src: url('../../public/fonts/DIOGENES.ttf');
+    src: url('../fonts/DIOGENES.ttf');
 }
 
 @font-face {
     font-family: Trajan;
-    src: url('../../public/fonts/TrajanPro-Regular.ttf');
+    src: url('../fonts/TrajanPro-Regular.ttf');
 }
 
 @theme {

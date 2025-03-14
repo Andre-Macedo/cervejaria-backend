@@ -1,16 +1,16 @@
 services:
-    app:
+    cervejaria-backend:
         build:
             context: .
             dockerfile: Dockerfile
         restart: unless-stopped
+        container_name: cervejaria-backend
         networks:
-            - docker-network
+            - proxy-network
         ports:
-            - 9001:9000
+            - 127.0.0.1:9000:9000
         volumes:
-            - app-data:/var/www/html
-            - node_modules:/var/www/html/node_modules
+            - .:/var/www/html
         env_file:
            - .env
         environment:
@@ -20,10 +20,6 @@ services:
             - DB_USERNAME=${DB_USERNAME}
             - DB_PASSWORD=${DB_PASSWORD}
 
-volumes:
-    app-data: {}
-    node_modules: {}
-
 networks:
-    docker-network:
-        driver: bridge
+    proxy-network:
+        external: true
