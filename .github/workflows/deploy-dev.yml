@@ -26,5 +26,5 @@ jobs:
           git pull origin dev
           docker-compose down
           docker-compose up -d --build
-	        docker restart nginx-proxy
+          docker restart nginx-proxy
         EOF
