@@ -17,6 +17,10 @@ jobs:
             chmod 600 ~/.ssh/id_ed25519
             ssh-keyscan -H 75.119.133.70 >> ~/.ssh/known_hosts
 
+        - name: Debug SSH Connection
+          run: |
+            ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no root@75.119.133.70 "echo 'SSH Connection Successful'"
+
         - name: Deploy to VPS
           run: |
             ssh root@75.119.133.70 << 'EOF'
