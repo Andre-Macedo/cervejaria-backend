@@ -25,7 +25,11 @@ jobs:
           run: |
             ssh root@75.119.133.70 << 'EOF'
             cd /var/www/cervejaria-backend
-            git pull origin dev
+            git config --global --add safe.directory /var/www/cervejaria-backend
+            git fetch origin
+            git checkout dev
+            git pull origin dev --no-rebase --verbose
+            ls -la
             docker-compose down
             docker-compose up -d --build
             docker restart nginx-proxy
