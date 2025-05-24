@@ -26,6 +26,7 @@ jobs:
             ssh root@75.119.133.70 << 'EOF'
             cd /var/www/cervejaria-backend
             git config --global --add safe.directory /var/www/cervejaria-backend
+            git stash push -m "Stashing local changes before pull"
             git fetch origin
             git checkout dev
             git pull origin dev --no-rebase --verbose
