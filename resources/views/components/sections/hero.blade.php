@@ -3,7 +3,7 @@
     <div class="relative h-full flex items-center justify-center text-center">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="border-8 border-greek-blue p-12 bg-white bg-opacity-90">
-                <div class="border-2 border-greek-gold p-8 sm:p4">
+                <div class="border-2 border-greek-gold p-4 sm:p-8">
                     <h1 class="text-3xl sm:text-6xl font-bold text-greek-blue mb-6 font-trajan">
                         Cervejaria Dionísio
                     </h1>
