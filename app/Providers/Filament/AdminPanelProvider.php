@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -51,8 +52,12 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->defaultThemeMode(ThemeMode::Light)
+            ->darkMode(false)
+            ->viteTheme('resources/css/filament/admin/theme.css', 'build/filament')
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->brandName('Cervejaria Dionisio');
     }
 }

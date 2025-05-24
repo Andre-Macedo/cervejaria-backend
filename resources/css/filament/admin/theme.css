@@ -1,0 +1,48 @@
+
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+@config 'tailwind.config.js';
+
+
+
+@layer base {
+    :root {
+        --primary: 35, 72, 118; /* Greek Blue #234876 */
+        --secondary: 212, 175, 55; /* Greek Gold #D4AF37 */
+        --gray: 245, 241, 230; /* Greek Cream #F5F1E6 */
+    }
+
+    body {
+        font-family: 'Trajan Pro', serif;
+    }
+}
+
+.fi-brand {
+    background-color: rgb(var(--primary));
+    color: rgb(var(--gray));
+}
+
+.fi-sidebar, .fi-sidebar-nav {
+    background-color: rgb(var(--gray));
+    color: rgb(var(--primary));
+}
+
+.fi-btn {
+    background-color: rgb(var(--secondary));
+    color: rgb(var(--primary));
+}
+
+.fi-btn:hover {
+    background-color: rgb(180, 150, 40);
+}
+
+.fi-topbar nav {
+    background-color: rgb(var(--primary));
+    border-bottom: rgb(var(--secondary)) 2px solid;
+}
+
+.fi-sidebar-header {
+    background-color: rgb(var(--primary));
+    border-bottom: rgb(var(--secondary)) 2px solid;
+    color: rgb(var(--gray));
+}
+
