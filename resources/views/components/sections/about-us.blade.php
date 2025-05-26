@@ -22,7 +22,7 @@
             <div class="relative">
                 <div class="absolute inset-0 border-4 border-greek-gold transform translate-x-4 translate-y-4"></div>
                 <img
-                    src="{{ asset('images/about-brewery.jpg') }}"
+                    src="https://images.unsplash.com/photo-1694641027107-a23dc711c825?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt="Interior da cervejaria"
                     class="relative z-10 w-full h-[600px] object-cover border-4 border-greek-blue"
                 />
