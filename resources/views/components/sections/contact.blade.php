@@ -1,4 +1,4 @@
-<section class="py-24 bg-greek-cream">
+<section class="py-24 bg-greek-cream" id="contact">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
             <h2 class="text-4xl font-trajan text-greek-blue mb-4">Visite-nos</h2>
