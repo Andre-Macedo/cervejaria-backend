@@ -10,9 +10,9 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 class PlayerScoreResource extends Resource
 {
@@ -25,18 +25,19 @@ class PlayerScoreResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return PlayerScore::query()
-            ->select('player_scores.*')
-            ->join(DB::raw("(
-                SELECT player_id, MAX(score) AS max_score
-                FROM player_scores
-                GROUP BY player_id
-            ) AS best_scores"), function ($join) {
-                $join->on('player_scores.player_id', '=', 'best_scores.player_id')
-                    ->on('player_scores.score', '=', 'best_scores.max_score');
+            ->whereIn('id', function ($query) {
+                $query->select(DB::raw('MAX(id)'))
+                    ->from('player_scores')
+                    ->groupBy('player_id')
+                    ->whereIn('score', function ($subQuery) {
+                        $subQuery->select(DB::raw('MAX(score)'))
+                            ->from('player_scores')
+                            ->groupBy('player_id');
+                    });
             })
-            ->with('player')
-            ->orderByDesc('player_scores.score')
-            ->orderBy('player_scores.created_at');
+            ->with('player') // Ensure the relationship loads
+            ->orderByDesc('score')
+            ->orderBy('created_at');
     }
 
     public static function form(Form $form): Form
