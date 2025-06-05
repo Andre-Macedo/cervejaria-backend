@@ -89,7 +89,7 @@ Route::get('/scores', function (Request $request) {
                 'player_id' => $score->player_id,
                 'player_name' => $score->player_name,
                 'score' => $score->score,
-                'rank' => $index + 1,
+                'rank' => $offset + $index + 1,
                 'created_at' => $score->created_at,
             ];
         });
