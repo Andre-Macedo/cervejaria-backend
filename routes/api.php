@@ -85,6 +85,7 @@ Route::get('/scores', function (Request $request) {
         ->take($limit) // Apply limit
         ->get()
         ->map(function ($score, $index) use ($offset) {
+
             return [
                 'player_id' => $score->player_id,
                 'player_name' => $score->player_name,
