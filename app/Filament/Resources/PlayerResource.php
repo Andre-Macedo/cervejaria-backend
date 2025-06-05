@@ -23,7 +23,10 @@ class PlayerResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255)
+                    ->label('Nome'),
             ]);
     }
 
@@ -31,7 +34,14 @@ class PlayerResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nome')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Criado em')
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //

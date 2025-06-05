@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\DB;
 
 class PlayerScoreResource extends Resource
 {
@@ -21,26 +22,43 @@ class PlayerScoreResource extends Resource
     protected static ?string $recordTitleAttribute = 'player_name';
     protected static ?string $navigationGroup = 'Game App';
 
+    public static function getEloquentQuery(): Builder
+    {
+        return PlayerScore::query()
+            ->select('player_scores.*')
+            ->join(DB::raw("(
+                SELECT player_id, MAX(score) AS max_score
+                FROM player_scores
+                GROUP BY player_id
+            ) AS best_scores"), function ($join) {
+                $join->on('player_scores.player_id', '=', 'best_scores.player_id')
+                    ->on('player_scores.score', '=', 'best_scores.max_score');
+            })
+            ->with('player')
+            ->orderByDesc('player_scores.score')
+            ->orderBy('player_scores.created_at');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('player_name')
-                    ->required()
-                    ->maxLength(255)
-                    ->label('Nome do Jogador'),
+                Forms\Components\Select::make('player_id')
+                    ->label('Jogador')
+                    ->relationship('player', 'name')
+                    ->required(),
                 Forms\Components\TextInput::make('score')
                     ->required()
                     ->numeric()
                     ->label('Pontuação'),
-            ]);
+                ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('player_name')
+                Tables\Columns\TextColumn::make('player.name')
                     ->label('Nome')
                     ->searchable()
                     ->sortable(),
@@ -51,7 +69,7 @@ class PlayerScoreResource extends Resource
                     ->label('Data')
                     ->dateTime()
                     ->sortable(),
-            ])
+                ])
             ->defaultSort('score', 'desc')
             ->filters([
                 //
