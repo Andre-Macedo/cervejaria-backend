@@ -38,6 +38,7 @@ Route::post('/answers', function (Request $request) {
     return response()->json([
         'is_correct' => $isCorrect,
         'points' => $points,
+        'correct_option' => $question->correctOption->value,
     ]);
 })->name('answers');
 

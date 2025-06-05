@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->text('description');
-            $table->foreignId('option_id')->constrained('options')->onDelete('restrict'); // Correct answer
+            $table->foreignId('option_id');
             $table->enum('difficulty', ['easy', 'medium', 'hard'])->default('easy');
             $table->timestamps();
             $table->softDeletes();
