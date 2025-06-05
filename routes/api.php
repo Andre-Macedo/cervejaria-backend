@@ -63,7 +63,10 @@ Route::post('/scores', function (Request $request) {
     return response()->json(['message' => 'Score saved', 'data' => $score], 201);
 })->name('scores.store');
 
-Route::get('/scores', function () {
+Route::get('/scores', function (Request $request) {
+    $limit = $request->query('limit', 15); // Default to 15 if not provided
+    $offset = $request->query('offset', 0); // Default to 0 if not provided
+
     $scores = PlayerScore::select('player_scores.player_id', 'players.name as player_name', 'player_scores.score', 'player_scores.created_at')
         ->join('players', 'player_scores.player_id', '=', 'players.id')
         ->whereIn('player_scores.id', function ($query) {
@@ -78,6 +81,8 @@ Route::get('/scores', function () {
         })
         ->orderBy('player_scores.score', 'desc')
         ->orderBy('player_scores.created_at', 'asc')
+        ->skip($offset) // Apply offset
+        ->take($limit) // Apply limit
         ->get()
         ->map(function ($score, $index) {
             return [
